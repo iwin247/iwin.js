@@ -1,0 +1,22 @@
+{
+  "name" : "iwin247.js",
+  "version" : "0.0.1",
+  "description" : "iwin247 coding",
+  "keywords" : [
+    "bene.js",
+    "js",
+    "node.js",
+    "node",
+    "social",
+    "data"
+  ],
+  "dependencies" : {
+    "express" : "*",
+    "mongoose" : "*",
+    "randomstring" : "*",
+    "passport" : "*",
+    "passport-github-token": "*",
+    "passport-twitter-token": "*",
+    "passport-facebook-token" : "*"
+  }
+}
