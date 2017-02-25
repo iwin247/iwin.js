@@ -1,9 +1,10 @@
 var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
+var name = require('../package.json');
 
-exports.connect = (name)=>{
- return mongoose.connect('mongodb://localhost/'+name);
-}
+//it will connect to localhost/projectname
+
+var db = mongoose.connect('mongodb://localhost/'+name.name);
+mongoose.Promise = global.Promise;
 
 var UsersSchema = mongoose.Schema({
   id: {type: String},

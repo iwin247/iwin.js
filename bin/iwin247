@@ -102,6 +102,7 @@ function createApplication(app_name, path) {
   var mongo = loadTemplate('js/mongo/index.js');
   var index = loadTemplate('js/routes/index.js');
   var users = loadTemplate('js/routes/users.js');
+  var social = loadTemplate('js/passport/social.json')
 
   // CSS
   var css = loadTemplate('css/style.css');
@@ -179,7 +180,14 @@ function createApplication(app_name, path) {
           'cookie-parser': '~1.4.3',
           'debug': '~2.2.0',
           'morgan': '~1.7.0',
-          'serve-favicon': '~2.3.0'
+          'serve-favicon': '~2.3.0',
+          'randomstring': '*',
+          'async': '*',
+          'passport': '*',
+          'passport-facebook-token': '*',
+          'passport-github-token': '*',
+          'passport-twitter-token': '*',
+          'mongoose': '*'
       }
     }
 
@@ -218,10 +226,13 @@ function createApplication(app_name, path) {
 
     mkdir(path + '/mongo', ()=>{
       write(path + '/mongo/index.js', mongo);
+      complete();
     });
 
     mkdir(path + '/passport', ()=>{
       write(path + '/passport/index.js', passport);
+      write(path + '/passport/social.json', social);
+      complete();
     });
 
     write(path + '/.gitignore', fs.readFileSync(__dirname + '/../templates/js/gitignore', 'utf-8'));
