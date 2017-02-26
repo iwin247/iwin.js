@@ -43,10 +43,12 @@ var auth = require('./routes/auth')(router, db.Users, passport, rndString);
 
 //router setting
 app.use('/', index);
-app.use('/users', user);
+app.use('/users', users);
+app.use('/auth', auth);
 
 
 //create server
+app.listen(port);
 app.on('error', onError);
 app.on('listening', onListening);
 

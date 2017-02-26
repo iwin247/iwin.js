@@ -1,5 +1,5 @@
 module.exports = (router, Users, passport, rndString) =>{
-  router.post('/auth/signin', (req, res) => {
+  router.post('/signup', (req, res) => {
     var params = ['id', 'passwd', 'name'];
 
     if(check_param(req.body, params)){
@@ -24,7 +24,7 @@ module.exports = (router, Users, passport, rndString) =>{
     } 
   })
   
-  .post('/auth/signup', (req,res)=>{
+  .post('/signup', (req,res)=>{
     var params = ['id', 'passwd'];
     if(check_param(req.body, params)){
       Users.findOne({id: req.body.id, passwd: req.body.passwd}, (err, user)=>{
@@ -35,12 +35,12 @@ module.exports = (router, Users, passport, rndString) =>{
     }else return res.status(400).send("param missing or null");
   })
 
-  .get('/auth/auto/:token', (req, res)=>{
+  .get('/auto/:token', (req, res)=>{
      var params = ['token'];
 
      if(check_param(req.params, params)){
        const token = req.params.token;
-       Users.findOne({token: token}, (err, user) =>{
+       Users.findOne({token: token}, {_id: 0, passwd: 0},(err, user) =>{
          if(err) return res.status(500).send("DB error"); 
          if(user) return res.status(200).json({id: user.id, name: user.name, token: user.token});
          else return res.status(404).send("user not found");
@@ -53,7 +53,7 @@ module.exports = (router, Users, passport, rndString) =>{
   //social auth
   .get('/github/token', passport.authenticate('github-token'), (req, res)=>{
     if (req.user) {
-      Users.findOne({github_id: req.user._json.id}, {_id: 0}, (err, users)=>
+      Users.findOne({github_id: req.user._json.id}, {_id: 0}, (err, users)=>{
         if(err) err;
         if(users) return res.status(200).send(users);
         else{
