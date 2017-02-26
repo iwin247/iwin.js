@@ -39,7 +39,7 @@ app.use(passport.session());
 //router setting
 var index = require('./routes/index')(router);
 var users = require('./routes/users')(router, db.Users, passport);
-var auth = require('./routes/auth')(router, db.Users, passport);
+var auth = require('./routes/auth')(router, db.Users, passport, rndString);
 
 //router setting
 app.use('/', index);

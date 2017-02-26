@@ -1,8 +1,8 @@
-module.exports = (router, rnd_string, Users, passport, func) =>{
+module.exports = (router, Users, passport, rndString) =>{
   router.post('/auth/signin', (req, res) => {
     var params = ['id', 'passwd', 'name'];
 
-    if(func.check_param(req.body, params)){
+    if(check_param(req.body, params)){
       const id = req.body.id;
       const passwd = req.body.passwd;
       const name = req.body.name;
@@ -11,7 +11,7 @@ module.exports = (router, rnd_string, Users, passport, func) =>{
         id: id,
         passwd: passwd,
         name: name,
-        token: rnd_string.generate()
+        token: rndString.generate()
       });
     
       new_user.save((err, data)=>{
@@ -26,7 +26,7 @@ module.exports = (router, rnd_string, Users, passport, func) =>{
   
   .post('/auth/signup', (req,res)=>{
     var params = ['id', 'passwd'];
-    if(func.check_param(req.body, params)){
+    if(check_param(req.body, params)){
       Users.findOne({id: req.body.id, passwd: req.body.passwd}, (err, user)=>{
         if(err) return res.status(500).send("DB err");
         if(user) return res.status(200).json(user);
@@ -38,7 +38,7 @@ module.exports = (router, rnd_string, Users, passport, func) =>{
   .get('/auth/auto/:token', (req, res)=>{
      var params = ['token'];
 
-     if(func.check_param(req.params, params)){
+     if(check_param(req.params, params)){
        const token = req.params.token;
        Users.findOne({token: token}, (err, user) =>{
          if(err) return res.status(500).send("DB error"); 
@@ -53,14 +53,14 @@ module.exports = (router, rnd_string, Users, passport, func) =>{
   //social auth
   .get('/github/token', passport.authenticate('github-token'), (req, res)=>{
     if (req.user) {
-      Users.findOne({github_id: req.user._json.id}, {_id: 0}, function(err, users) {
+      Users.findOne({github_id: req.user._json.id}, {_id: 0}, (err, users)=>
         if(err) err;
         if(users) return res.status(200).send(users);
         else{
           github_user = new Users({
             github_id: req.user._json.id,
             name: req.user._json.name,
-            token: rnd_string.generate(),
+            token: rndString.generate(),
           });
           github_user.save((err, result)=>{
             if(err) return res.stauts(500).send("DB err");
@@ -71,16 +71,16 @@ module.exports = (router, rnd_string, Users, passport, func) =>{
     }else res.status(401).send("unauthed");
   })
 
-  .get('/fb/token', passport.authenticate('facebook-token'), function(req, res) {
+  .get('/fb/token', passport.authenticate('facebook-token'), (req, res)=>{
     if (req.user) {
-      Users.findOne({facebook_id: req.user._json.id}, {_id: 0}, function(err, users) {
+      Users.findOne({facebook_id: req.user._json.id}, {_id: 0}, (err, users)=>{
         if(err) err;
         if(users) res.status(200).send(users);
         else{
           facebook_user = new Users({
             facebook_id: req.user._json.id,
             name: req.user._json.name,
-            token: rnd_string.generate(),
+            token: rndString.generate(),
           });
           facebook_user.save((err, result)=>{
             if(err) return res.stauts(500).send("DB err");
@@ -93,14 +93,14 @@ module.exports = (router, rnd_string, Users, passport, func) =>{
 
   .get('/tw/token', passport.authenticate('twitter-token'), (req, res) =>{
     if(req.user) {
-      Users.findOne({twitter_id: req.user._json.id}, {_id: 0}, function(err, users) {
+      Users.findOne({twitter_id: req.user._json.id}, {_id: 0}, (err, users)=>{
         if(err) err;
         if(users) res.status(200).send(users);
         else{
           twitter_user = new Users({
             twitter_id: req.user._json.id,
             name: req.user._json.name,
-            token: rnd_string.generate(),
+            token: rndString.generate(),
           });
           twitter_user.save((err, result)=>{
             if(err) return res.stauts(500).send("DB err");
