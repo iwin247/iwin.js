@@ -187,7 +187,9 @@ function createApplication(app_name, path) {
           'passport-facebook-token': '*',
           'passport-github-token': '*',
           'passport-twitter-token': '*',
-          'mongoose': '*'
+          'mongoose': '*',
+          'multer': '*',
+          'Q': '*'
       }
     }
 

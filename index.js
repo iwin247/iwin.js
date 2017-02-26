@@ -1,7 +1,7 @@
 var multer = require('multer');
 var Q = require('q');
 
-var upload = (req, res, boardid, date, params) => {
+var upload = (req, res) => {
   var deferred = Q.defer();
   var storage = multer.diskStorage({
       // 서버에 저장할 폴더
@@ -11,8 +11,8 @@ var upload = (req, res, boardid, date, params) => {
      // 서버에 저장할 파일 명
      filename: (req, file, cb) => {
        file.uploadedFile = {
-         name: boardid,
-         ext: file.mimetype.split('/')[1]
+         name: file.minmetype.split('/')[0], //file name
+         ext: file.mimetype.split('/')[1] //file type
         };
         cb(null, file.uploadedFile.name + '.' + file.uploadedFile.ext);
      }
@@ -55,7 +55,6 @@ var upload = (req, res, boardid, date, params) => {
 };
 
 exports.upload = upload;
-exports.profile_upload = profile_upload;
 exports.check_param = (req_param, params) =>{
   return params.every(str => req_param[str] != undefined && req_param[str] != null && req_param[str].length > 0);
 }

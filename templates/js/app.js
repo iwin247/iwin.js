@@ -17,7 +17,7 @@ var async = require('async');
 //module setting
 var db = require('./mongo');
 var passport = require('./passport')(db.Users);
-var func = require('./func');
+require('iwin.js');
 
 var port = process.env.PORT || 3000;
 
@@ -36,10 +36,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 //router setting
 var index = require('./routes/index')(router);
 var users = require('./routes/user')(router, db.Users, passport);
+var auth = require('./routes/auth')(router, db.Users);
 
 //router setting
 app.use('/', index);
