@@ -14,6 +14,8 @@
     "express" : "*",
     "mongoose" : "*",
     "randomstring" : "*",
+    "multer": "*",
+    "Q": "*",
     "passport" : "*",
     "passport-github-token": "*",
     "passport-twitter-token": "*",

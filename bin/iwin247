@@ -102,6 +102,7 @@ function createApplication(app_name, path) {
   var mongo = loadTemplate('js/mongo/index.js');
   var index = loadTemplate('js/routes/index.js');
   var users = loadTemplate('js/routes/users.js');
+  var auth = loadTemplate('js/routes/auth.js');
   var social = loadTemplate('js/passport/social.json')
 
   // CSS
@@ -138,6 +139,7 @@ function createApplication(app_name, path) {
     mkdir(path + '/routes', function(){
       write(path + '/routes/index.js', index);
       write(path + '/routes/users.js', users);
+      write(path + '/routes/auth.js', auth);
       complete();
     });
 

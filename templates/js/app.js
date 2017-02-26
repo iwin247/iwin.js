@@ -27,7 +27,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -38,8 +38,8 @@ app.use(passport.session());
 
 //router setting
 var index = require('./routes/index')(router);
-var users = require('./routes/user')(router, db.Users, passport);
-var auth = require('./routes/auth')(router, db.Users);
+var users = require('./routes/users')(router, db.Users, passport);
+var auth = require('./routes/auth')(router, db.Users, passport);
 
 //router setting
 app.use('/', index);

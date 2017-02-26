@@ -1,4 +1,4 @@
-module.exports = (router, Users){
+module.exports = (router, Users)=>{
   router.get('/', (req, res)=>{
     
   })
@@ -14,5 +14,7 @@ module.exports = (router, Users){
   .delete('/:id', (req, res)=>{
 
   })
+
+  return router;
 }
 
