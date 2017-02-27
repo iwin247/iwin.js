@@ -20,5 +20,10 @@
     "passport-github-token": "*",
     "passport-twitter-token": "*",
     "passport-facebook-token" : "*"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:iwin247/iwin.js.git"
+  },
+  "license": "MIT"
 }

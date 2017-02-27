@@ -14,11 +14,7 @@ var pkg = require('../package.json');
 
 var version = pkg.version;
 
-// Re-assign process.exit because of commander
-// TODO: Switch to a different command framework
 process.exit = exit
-
-// CLI
 
 before(program, 'outputHelp', function () {
   this.allowUnknownOption();
@@ -28,19 +24,12 @@ program
   .version(version)
   .usage('[options] [dir]')
   .option('-e, --ejs', 'add ejs engine support (defaults to jade)')
-  .option('    --hbs', 'add handlebars engine support')
-  .option('-H, --hogan', 'add hogan.js engine support')
   .option('-c, --css <engine>', 'add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)')
-  .option('    --git', 'add .gitignore')
   .option('-f, --force', 'force on non-empty directory')
   .parse(process.argv);
 
 if (!exit.exited)main();
 
-
-/**
- * Install a before function; AOP.
- */
 
 function before(obj, method, fn) {
   var old = obj[method];
@@ -50,10 +39,6 @@ function before(obj, method, fn) {
     old.apply(this, arguments);
   };
 }
-
-/**
- * Prompt for confirmation on STDOUT/STDIN
- */
 
 function confirm(msg, callback) {
   var rl = readline.createInterface({
@@ -67,11 +52,6 @@ function confirm(msg, callback) {
   });
 }
 
-/**
- * Create application at the given directory `path`.
- *
- * @param {String} path
- */
 
 function createApplication(app_name, path) {
   var wait = 5;
@@ -342,24 +322,11 @@ function main() {
   });
 }
 
-/**
- * echo str > path.
- *
- * @param {String} path
- * @param {String} str
- */
 
 function write(path, str, mode) {
   fs.writeFileSync(path, str, { mode: mode || 0666 });
   console.log('   \x1b[36mcreate\x1b[0m : ' + path);
 }
-
-/**
- * Mkdir -p.
- *
- * @param {String} path
- * @param {Function} fn
- */
 
 function mkdir(path, fn) {
   mkdirp(path, 0755, function(err){
