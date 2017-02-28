@@ -1,15 +1,18 @@
 {
-  "name" : "iwin247.js",
-  "version" : "0.0.1",
-  "description" : "iwin247 coding",
+  "name" : "iwin.js",
+  "version" : " 1.1.4",
+  "description" : "iwin247's EDCAN server generator",
   "keywords" : [
-    "bene.js",
+    "iwin.js",
     "js",
     "node.js",
     "node",
     "social",
-    "data"
+    "data",
+    "EDCAN",
+    "edcan"
   ],
+  "author": { "name": "iwin247", "email": "iwin247@edcan.kr", "url": "http://blog.iwin247.kr/" },
   "dependencies" : {
     "express" : "*",
     "mongoose" : "*",
@@ -19,11 +22,26 @@
     "passport" : "*",
     "passport-github-token": "*",
     "passport-twitter-token": "*",
-    "passport-facebook-token" : "*"
+    "passport-facebook-token" : "*",
+    "commander": "2.7.1",
+    "mkdirp": "0.5.1",
+    "sorted-object": "2.0.0"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:iwin247/iwin.js.git"
   },
-  "license": "MIT"
+  "bugs": {
+    "url": "http://github.com/iwin247/iwin.js/issues"
+  },
+  "preferGlobal": true,
+  "bin": {
+    "iwin247": "./bin/iwin247"
+  },
+  "main": "bin/iwin247",
+  "licenses": [{
+    "type": "MIT",
+    "url": "http://www.opensource.org/licenses/MIT" 
+  }],
+  "readme": "README.md"
 }

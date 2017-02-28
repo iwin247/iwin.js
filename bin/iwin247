@@ -94,24 +94,24 @@ function createApplication(app_name, path) {
 
   mkdir(path, ()=>{
     mkdir(path + '/public');
-    mkdir(path + '/public/javascripts');
-    mkdir(path + '/public/images');
-    mkdir(path + '/public/stylesheets', function(){
+    mkdir(path + '/public/js');
+    mkdir(path + '/public/img');
+    mkdir(path + '/public/css', function(){
       switch (program.css) {
         case 'less':
-          write(path + '/public/stylesheets/style.less', less);
+          write(path + '/public/css/style.less', less);
           break;
         case 'stylus':
-          write(path + '/public/stylesheets/style.styl', stylus);
+          write(path + '/public/css/style.styl', stylus);
           break;
         case 'compass':
-          write(path + '/public/stylesheets/style.scss', compass);
+          write(path + '/public/css/style.scss', compass);
           break;
         case 'sass':
-          write(path + '/public/stylesheets/style.sass', sass);
+          write(path + '/public/css/style.sass', sass);
           break;
         default:
-          write(path + '/public/stylesheets/style.css', css);
+          write(path + '/public/css/style.css', css);
       }
       complete();
     });
