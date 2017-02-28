@@ -17,7 +17,6 @@ var async = require('async');
 //module setting
 var db = require('./mongo');
 var passport = require('./passport')(db.Users);
-require('iwin.js');
 
 var port = process.env.PORT || 3000;
 
